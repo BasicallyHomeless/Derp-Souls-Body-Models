@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +14,13 @@ public class ArmorCalculator {
 		}
 	}
 	public static void ChestArmor(String ermer) {
-		String csvFile = "C:/Users/Phoenix02/workspace/Dark Souls Armor Calculator/chestinfo.csv";
+		String csvFile = "";
+		try {
+			File currentDirectory = new File(new File(".").getAbsolutePath());
+			csvFile = currentDirectory.getCanonicalPath() + "/chestinfo.csv";
+		} catch (IOException e) {
+			System.out.println("Could not get current working directory.");
+		}
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ",";
@@ -47,7 +54,7 @@ public class ArmorCalculator {
 					System.out.println("Durability: " + cA[11]);
 					System.out.println("Weight: " + cA[12]);
 					System.out.println(" ");
-				} 
+				}
 			}
 
 		} catch (FileNotFoundException e) {
